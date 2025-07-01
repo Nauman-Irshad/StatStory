@@ -601,62 +601,6 @@ new Chart(document.getElementById('histogram').getContext('2d'), {
   }
 });
 
-// Box Plot (Simulated with 3 bars)
-new Chart(document.getElementById('boxplot').getContext('2d'), {
-  type: 'bar',
-  data: {
-    labels: ['Height'],
-    datasets: [
-      {
-        label: 'Min to Max (Whisker)',
-        data: [10],
-        base: 140,
-        backgroundColor: 'lightgray'
-      },
-      {
-        label: 'Q1 to Q3 (Box)',
-        data: [3],
-        base: 145,
-        backgroundColor: 'lightgreen'
-      },
-      {
-        label: 'Median (Q2)',
-        data: [0.05],
-        base: 147,
-        backgroundColor: 'darkgreen'
-      }
-    ]
-  },
-  options: {
-    indexAxis: 'y',
-    plugins: {
-      datalabels: {
-        formatter: (value, ctx) => {
-          const base = ctx.dataset.base;
-          return `${base + value}`;
-        },
-        color: 'black',
-        anchor: 'center',
-        align: 'center'
-      },
-      legend: { position: 'top' },
-      title: {
-        display: true,
-        text: 'Box & Whisker (Simulated)'
-      }
-    },
-    scales: {
-      x: {
-        min: 135,
-        max: 155,
-        title: {
-          display: true,
-          text: 'Height Scale'
-        }
-      }
-    }
-  }
-});
 
 // Frequency Distribution
 new Chart(document.getElementById('freqdist').getContext('2d'), {
