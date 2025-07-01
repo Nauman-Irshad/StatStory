@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StatStory - Statistical Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header, footer { background-color: #2c3e50; color: white; padding: 10px 20px; }
+    header { display: flex; justify-content: space-between; align-items: center; }
+    header img { height: 40px; }
+    nav a { margin: 0 10px; color: white; text-decoration: none; }
+    .content { padding: 20px; }
+    canvas { margin: 20px 0; }
+    footer a { color: white; margin: 0 10px; text-decoration: none; }
+  </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StatStory Team</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #f0f8ff, #e6f2ff);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #313133;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      background: #030303;
+      padding: 8px 16px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    header nav a:hover {
+      background: #004c85;
+    }
+
+    h2 {
+      text-align: center;
+      color: #003c66;
+      margin: 30px 0 10px;
+    }
+
+    .members {
+      display: flex;
+      overflow-x: auto;
+      padding: 20px;
+      gap: 20px;
+      scroll-behavior: smooth;
+    }
+
+    .member-box {
+      flex: 0 0 300px;
+      background: linear-gradient(135deg, #ffffff, #f0f8ff);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: slideIn 1s ease forwards;
+      opacity: 0;
+    }
+
+    .member-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.2);
+    }
+
+    .member-box h3 {
+      margin-top: 0;
+      color: #005b96;
+    }
+
+    .tasks {
+      margin-top: 10px;
+      padding-left: 20px;
+      color: #444;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StatStory Header</title>
+  <style>
+    /* Header Styling */
+    header {
+      background-color: #3d3f41;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header div {
+      display: flex;
+      align-items: center;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    header h1 {
+      margin-left: 10px;
+      font-size: 28px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    nav input[type="text"] {
+      padding: 6px 10px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      background: #005fa3;
+      padding: 28px 16px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .search-container {
+    position: relative;
+  }
+
+  nav input[type="text"] {
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+  }
+
+  .bars {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 2px;
+    height: 20px;
+    pointer-events: none;
+  }
+
+  .bar {
+    width: 3px;
+    background: #005fa3;
+    animation: histogram 1s infinite ease-in-out;
+    animation-play-state: paused;
+  }
+
+  .bar1 { animation-delay: 0s; }
+  .bar2 { animation-delay: 0.1s; }
+  .bar3 { animation-delay: 0.2s; }
+  .bar4 { animation-delay: 0.3s; }
+  .bar5 { animation-delay: 0.4s; }
+
+  @keyframes histogram {
+    0% { height: 3px; }
+    25% { height: 10px; }
+    50% { height: 18px; }
+    75% { height: 10px; }
+    100% { height: 3px; }
+  }
+
+  /* Activate animation on input focus */
+  .search-container:focus-within .bar {
+    animation-play-state: running;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    background: #005fa3;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+
+  nav a:hover {
+    background: #004c85;
+  }
+
+
+    nav a:hover {
+      background: #004c85;
+    }
+
+    /* Animated shapes */
+    .shape {
+      position: absolute;
+      width: 50px;
+      height: 40px;
+      opacity: 0.1;
+      animation: float 5s infinite linear;
+    }
+
+    .circle {
+      background-color: #ffffff;
+      border-radius: 50%;
+    }
+
+    .square {
+      background-color: #ffcc00;
+    }
+
+    .triangle {
+      width: 20;
+      height: 120;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 20px solid #00ffff;
+      background: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100px) rotate(0deg);
+        opacity: 0.4;
+      }
+      50% {
+        opacity: 30.8;
+      }
+      100% {
+        transform: translateY(-300px) rotate(360deg);
+        opacity: 30.1;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+
+  <header>
+    <!-- Animated Shapes -->
+    <div class="shape circle" style="left: 20px; top: 30px;"></div>
+    <div class="shape square" style="left: 100px; top: 60px;"></div>
+    <div class="shape triangle" style="left: 180px; top: 90px;"></div>
+    <div class="shape circle" style="left: 250px; top: 40px;"></div>
+    <div class="shape square" style="left: 320px; top: 70px;"></div>
+
+    <!-- Logo + Title -->
+    <div>
+      <img src="logo (2).png" alt="StatStory Logo">
+      <h1>StatStory</h1>
+    </div>
+
+    <!-- Search + Login -->
+   <nav>
+  <div class="search-container">
+    <input type="text" placeholder="Search...">
+    <div class="bars">
+      <span class="bar bar1"></span>
+      <span class="bar bar2"></span>
+      <span class="bar bar3"></span>
+      <span class="bar bar4"></span>
+      <span class="bar bar5"></span>
+    </div>
+  </div>
+  <a href="#">Login</a>
+</nav>
+
+  </header>
+
+</body>
+</html>
+
+  <h2>Our Team Members & Responsibilities</h2>
+
+  <div class="members">
+    <div class="member-box">
+      <h3>Nauman Irshad Ali Shah</h3>
+      <p><strong>Reg#:</strong> L1F22BSCS0122</p>
+      <ul class="tasks">
+        <li>Histogram</li>
+    
+
+
+        <li>Frequency Distribution with Bins</li>
+        <li>Website, PPTs & Visualizations</li>
+      </ul>
+    </div>
+
+    <div class="member-box">
+      <h3>Shafay Sarwar</h3>
+      <p><strong>Reg#:</strong> L1F22BSCS1108</p>
+      <ul class="tasks">
+        <li>Descriptive Statistics</li>
+        <li>Confidence Interval</li>
+      </ul>
+    </div>
+
+    <div class="member-box">
+      <h3>Javeria Hussain</h3>
+      <p><strong>Reg#:</strong> L1F22BSCS1097</p>
+      <ul class="tasks">
+        <li>Z and t Tests (Hypothesis Testing)</li>
+        <li>Regression & Correlation</li>
+      </ul>
+    </div>
+
+    <div class="member-box">
+      <h3>Ghulam Mustafa Faisal</h3>
+      <p><strong>Reg#:</strong> L1F22BSCS0474</p>
+      <ul class="tasks">
+        <li>Normal Distribution</li>
+        <li>Binomial Distribution</li>
+        <li>Poisson Distribution</li>
+      </ul>
+    </div>
+
+    <div class="member-box">
+      <h3>Muhammad Saad Sultan</h3>
+      <p><strong>Reg#:</strong> L1F22BSCS0451</p>
+      <ul class="tasks">
+        <li>Normal Distribution</li>
+        <li>Binomial Distribution</li>
+        <li>Poisson Distribution</li>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+
+<div class="content">
+  <h2>1. Histogram (Scores)</h2>
+  <canvas id="histogram"></canvas>
+
+
+
+  <h2>2. Frequency Distribution (Marks)</h2>
+  <canvas id="freqdist"></canvas>
+
+  <h2>3. Confidence Interval & Descriptive Statistics</h2>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th>Metric</th>
+    <th>Value</th>
+    <th>Formula / Explanation</th>
+    <th>Result</th>
+  </tr>
+  <tr>
+    <td>Mean</td>
+    <td><mark>70</mark></td>
+    <td>Mean = Σx / n</td>
+    <td><strong>70</strong></td>
+  </tr>
+  <tr>
+    <td>Standard Deviation (SD)</td>
+    <td><mark>10</mark></td>
+    <td>SD = sqrt[Σ(x - mean)² / n]</td>
+    <td><strong>10</strong></td>
+  </tr>
+  <tr>
+    <td>Sample Size (n)</td>
+    <td><mark>100</mark></td>
+    <td>n = number of observations</td>
+    <td><strong>100</strong></td>
+  </tr>
+  <tr>
+    <td>Confidence Interval (95%)</td>
+    <td><mark>CI = Mean ± Z × (SD / √n)</mark></td>
+    <td>Z = 1.96 for 95%</td>
+    <td><strong>70 ± 1.96 × (10 / √100) = [68.04, 71.96]</strong></td>
+  </tr>
+</table>
+
+<p><strong>Conclusion:</strong> The 95% Confidence Interval is <mark>[68, 72]</mark>, meaning we are 95% confident the true population mean lies in this range.</p>
+
+<hr>
+
+<h2>5. Z-Test & T-Test for Hypothesis Testing</h2>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th>Test</th>
+    <th>Formula</th>
+    <th>Calculation</th>
+    <th>Result</th>
+    <th>Conclusion</th>
+  </tr>
+  <tr>
+    <td>Z-Test (Sample Mean vs Population Mean = 68)</td>
+    <td>Z = (x̄ - μ) / (σ / √n)</td>
+    <td>Z = (70 - 68) / (10 / √100) = <strong>2.0</strong></td>
+    <td><strong>p ≈ 0.045</strong></td>
+    <td><mark>p &lt; 0.05 ⇒ Reject H₀</mark></td>
+  </tr>
+  <tr>
+    <td>T-Test (Group A vs Group B)</td>
+    <td>t = (x̄₁ - x̄₂) / √[(s₁²/n₁)+(s₂²/n₂)]</td>
+    <td>Example: x̄₁ = 72, x̄₂ = 68, t = 2.1</td>
+    <td><strong>p = 0.04</strong></td>
+    <td><mark>p &lt; 0.05 ⇒ Statistically Significant</mark></td>
+  </tr>
+</table>
+
+<p><strong>Interpretation:</strong>  
+The Z-Test and T-Test both show significant results (p &lt; 0.05), so the null hypothesis (no difference) is rejected in both cases.</p>
+
+
+<h2>6. Normal, Binomial & Poisson Distributions</h2>
+<canvas id="distributionChart"></canvas>
+
+<h3>🧮 How These Were Calculated:</h3>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th>Distribution</th><th>Formula</th><th>Description</th>
+  </tr>
+  <tr>
+    <td><strong>Normal</strong> (μ = 5, σ = 1.5)</td>
+    <td>f(x) = (1/√2πσ) * e^(-(x−μ)²/2σ²)</td>
+    <td>Bell-shaped curve; symmetric around mean. Approximated manually as [0, 0.1, 0.3, ..., 0]</td>
+  </tr>
+  <tr>
+    <td><strong>Binomial</strong> (n = 10, p = 0.5)</td>
+    <td>P(k) = C(n, k) * p^k * (1−p)^(n−k)</td>
+    <td>Probability of getting exactly k successes in n trials. Shown for k = 0 to 10.</td>
+  </tr>
+  <tr>
+    <td><strong>Poisson</strong> (λ = 4)</td>
+    <td>P(k) = (λ^k * e^−λ) / k!</td>
+    <td>Probability of k events in fixed interval. Approximated for k = 0 to 10.</td>
+  </tr>
+</table>
+
+
+ <h2>7. Correlation & Regression</h2>
+<canvas id="regressionChart"></canvas>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th>Step</th><th>Formula</th><th>Value</th>
+  </tr>
+  <tr>
+    <td>Data Points (x, y)</td>
+    <td>-</td>
+    <td>(1,2), (2,4), (3,5), (4,8)</td>
+  </tr>
+  <tr>
+    <td>Mean of x (x̄)</td>
+    <td>Σx / n</td>
+    <td>(1+2+3+4)/4 = <strong>2.5</strong></td>
+  </tr>
+  <tr>
+    <td>Mean of y (ȳ)</td>
+    <td>Σy / n</td>
+    <td>(2+4+5+8)/4 = <strong>4.75</strong></td>
+  </tr>
+  <tr>
+    <td>Slope (b)</td>
+    <td>Σ[(x - x̄)(y - ȳ)] / Σ[(x - x̄)²]</td>
+    <td>
+      b = [(1−2.5)(2−4.75)+(2−2.5)(4−4.75)+(3−2.5)(5−4.75)+(4−2.5)(8−4.75)] / [(1−2.5)²+(2−2.5)²+(3−2.5)²+(4−2.5)²] =  
+      <strong>2.2</strong>
+    </td>
+  </tr>
+  <tr>
+    <td>Intercept (a)</td>
+    <td>a = ȳ − b × x̄</td>
+    <td>4.75 − 2.2 × 2.5 = <strong>-0.75</strong></td>
+  </tr>
+  <tr>
+    <td>Regression Line</td>
+    <td>y = a + bx</td>
+    <td><mark>y = -0.75 + 2.2x</mark></td>
+  </tr>
+</table>
+
+</div>
+
+<footer>
+  <p>Follow Us:</p>
+  <div class="social-links">
+    <a href="#">Facebook</a>
+    <a href="#">Twitter</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Instagram</a>
+  </div>
+  <p>&copy; 2025 StatStory. All rights reserved.</p>
+</footer>
+
+<style>
+  footer {
+     background-color: #3d3f41;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+  }
+
+  .social-links {
+    margin: 10px 0;
+  }
+
+  .social-links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  .social-links a:hover {
+    color: #ffdd57;
+  }
+</style>
+
+
+<script>
+Chart.register(ChartDataLabels);
+
+// Histogram
+new Chart(document.getElementById('histogram').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['60-65', '65-70', '70-75', '75-80', '80-85'],
+    datasets: [{
+      label: 'Frequency',
+      data: [8, 22, 30, 25, 15],
+      backgroundColor: 'skyblue'
+    }]
+  },
+  options: {
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'top',
+        color: 'black',
+        font: { weight: 'bold' }
+      }
+    },
+    scales: { y: { beginAtZero: true } }
+  }
+});
+
+
+
+
+
+
+
+// Frequency Distribution
+new Chart(document.getElementById('freqdist').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['40-50', '50-60', '60-70', '70-80', '80-90'],
+    datasets: [{
+      label: 'Frequency',
+      data: [5, 10, 20, 30, 15],
+      backgroundColor: 'orange',
+      datalabels: {
+        formatter: function(value, context) {
+          const label = context.chart.data.labels[context.dataIndex];
+          const [start, end] = label.split('-').map(Number);
+          const midpoint = (start + end) / 2;
+          return `Mid: ${midpoint}\nFreq: ${value}`;
+        },
+        anchor: 'end',
+        align: 'top',
+        color: 'black',
+        font: { weight: 'bold', size: 11 }
+      }
+    }]
+  },
+  options: {
+    plugins: {
+      datalabels: {
+        display: true
+      },
+      title: {
+        display: true,
+        text: 'Frequency Distribution with Bin Midpoints'
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Frequency'
+        }
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Bin Ranges'
+        }
+      }
+    }
+  }
+});
+
+
+// Distribution Chart
+new Chart(document.getElementById('distributionChart').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: Array.from({length: 11}, (_, i) => i), // x = 0 to 10
+    datasets: [
+      {
+        label: 'Normal',
+        data: [0, 0.1, 0.3, 0.6, 0.9, 1, 0.9, 0.6, 0.3, 0.1, 0],
+        borderColor: 'blue',
+        fill: false
+      },
+      {
+        label: 'Binomial',
+        data: [0.001, 0.01, 0.05, 0.117, 0.205, 0.246, 0.205, 0.117, 0.05, 0.01, 0.001], // Approx for n=10, p=0.5
+        borderColor: 'green',
+        fill: false
+      },
+      {
+        label: 'Poisson',
+        data: [0.018, 0.073, 0.146, 0.195, 0.195, 0.156, 0.104, 0.059, 0.029, 0.013, 0.005], // Approx for λ=4
+        borderColor: 'red',
+        fill: false
+      }
+    ]
+  },
+  options: {
+    plugins: { legend: { position: 'top' } },
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: { display: true, text: 'Probability' }
+      },
+      x: {
+        title: { display: true, text: 'x (Value)' }
+      }
+    }
+  }
+});
+
+
+// Regression Chart
+new Chart(document.getElementById('regressionChart').getContext('2d'), {
+  type: 'scatter',
+  data: {
+    datasets: [
+      {
+        label: 'Data Points',
+        data: [{x:1, y:2}, {x:2, y:4}, {x:3, y:5}, {x:4, y:8}],
+        backgroundColor: 'blue'
+      },
+      {
+        type: 'line',
+        label: 'Regression Line (y = -0.75 + 2.2x)',
+        data: [{x:1, y:1.45}, {x:4, y:8.05}],
+        borderColor: 'red',
+        fill: false,
+        tension: 0
+      }
+    ]
+  },
+  options: {
+    plugins: {
+      legend: { position: 'top' },
+      datalabels: { display: false }
+    },
+    scales: {
+      x: { beginAtZero: true, title: { display: true, text: 'X' } },
+      y: { beginAtZero: true, title: { display: true, text: 'Y' } }
+    }
+  }
+});
+
+</script>
+
+</body>
+</html>
